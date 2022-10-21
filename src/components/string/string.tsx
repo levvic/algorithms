@@ -39,22 +39,21 @@ export const StringComponent: React.FC = () => {
     updateCircles();
 
     const mid = elements.length % 2 === 0 ? Math.floor(elements.length / 2) - 1: Math.floor(elements.length / 2);
-    const initialState = elements;
 
     let temp: TElement;    
     for (let i = 0; i <= mid; i++) {
       setTimeout(function() {
-        initialState[i].state = ElementStates.Changing;
-        initialState[elements.length - i - 1].state = ElementStates.Changing;
-        setElements(initialState);
+        elements[i].state = ElementStates.Changing;
+        elements[elements.length - i - 1].state = ElementStates.Changing;
+        setElements(elements);
         updateCircles();
         setTimeout(function() {
-          temp = initialState[elements.length - i - 1];
-          initialState[elements.length - i - 1] = initialState[i];
-          initialState[i] = temp;
-          initialState[i].state = ElementStates.Modified;
-          initialState[elements.length - i - 1].state = ElementStates.Modified;
-          setElements(initialState);
+          temp = elements[elements.length - i - 1];
+          elements[elements.length - i - 1] = elements[i];
+          elements[i] = temp;
+          elements[i].state = ElementStates.Modified;
+          elements[elements.length - i - 1].state = ElementStates.Modified;
+          setElements(elements);
           updateCircles();
         }, 1000)
       }, 1000);
