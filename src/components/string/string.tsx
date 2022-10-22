@@ -7,17 +7,11 @@ import stringStyles from "./string.module.css";
 import { useState } from "react";
 import { ElementStates } from "../../types/element-states";
 import { setInterval } from "../../utils/utils";
-
-type TElement = {
-  element: string;
-  state: ElementStates;
-};
-
-type TElementState = Array<TElement>;
+import { TElement } from "../../types/element-type";
 
 export const StringComponent: React.FC = () => {
   const [inputValue, setInputValue] = useState<string>("");
-  const [elements, setElements] = useState<TElementState>([]);
+  const [elements, setElements] = useState<TElement<string>[]>([]);
   const [circles, setCircles] = useState<JSX.Element[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -26,7 +20,7 @@ export const StringComponent: React.FC = () => {
       return (
         <li key={index} >
         <Circle 
-          letter = {el.element}
+          letter = {el.value}
           state = {el.state}
         />
       </li>
@@ -40,7 +34,7 @@ export const StringComponent: React.FC = () => {
 
     const mid = elements.length % 2 === 0 ? Math.floor(elements.length / 2) - 1: Math.floor(elements.length / 2);
 
-    let temp: TElement;    
+    let temp: TElement<string>;    
     for (let i = 0; i <= mid; i++) {
       setTimeout(function() {
         elements[i].state = ElementStates.Changing;
@@ -68,7 +62,7 @@ export const StringComponent: React.FC = () => {
     setElements(
       e.currentTarget.value.split("").map((el) => {
         return {
-          element: el,
+          value: el,
           state: ElementStates.Default,
         };
       })

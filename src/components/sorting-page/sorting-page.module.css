@@ -1,0 +1,30 @@
+.controls {
+    grid-area: form;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0 12px;
+    width: 100%;
+  }
+  
+  .direction {
+    display: flex;
+    gap: 0 12px;
+    margin: 0 40px;
+  }
+  
+  .directionBtn {
+    min-width: 172px;
+  }
+  
+  .list {
+    justify-content: center;
+    grid-area: visual;
+    min-height: 360px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    align-items: flex-end;
+    gap: 0 16px;
+  }
