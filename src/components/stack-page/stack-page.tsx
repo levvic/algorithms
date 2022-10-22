@@ -52,7 +52,7 @@ export const StackPage: React.FC = () => {
 
   return (
     <SolutionLayout title="Стек">
-      <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
+      <div className={styles.form}>
         <Input
           maxLength={4}
           isLimitText
@@ -79,7 +79,7 @@ export const StackPage: React.FC = () => {
           onClick={handleClearClick}
           disabled={stack.getSize() === 0}
         />
-      </form>
+      </div>
       <ul className={styles.list}>
         {circles.map((element, index) => {
           return (
