@@ -19,7 +19,7 @@ export const FibonacciPage: React.FC = () => {
     setInputValue(Number(e.currentTarget.value));
   };
 
-  const calcFibSequence = (n: number) => {
+  const getFibonacciNumbers = (n: number) => {
     const arr: number[] = [];
     let prev = 1;
     let next = 1;
@@ -35,7 +35,7 @@ export const FibonacciPage: React.FC = () => {
 
   const renderFibSeq = async () => {
     setIsLoading(true);
-    const arr = calcFibSequence(inputValue);
+    const arr = getFibonacciNumbers(inputValue);
 
     for (let i = 0; i < arr.length; i++) {
       await setInterval(500);
