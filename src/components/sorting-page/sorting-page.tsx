@@ -102,9 +102,9 @@ export const SortingPage: React.FC = () => {
     setDirectionType(Direction.Ascending);
     setInProcessFlag(true);
 
-    if (sortingType == SortType.SelectionSort) {
+    if (sortingType === SortType.SelectionSort) {
       await selectionSort(array, Direction.Ascending);
-    } else if (sortingType == SortType.BubbleSort) {
+    } else if (sortingType === SortType.BubbleSort) {
       await bubbleSort(array, Direction.Ascending);
     }
 
@@ -115,9 +115,9 @@ export const SortingPage: React.FC = () => {
     setDirectionType(Direction.Descending);
     setInProcessFlag(true);
 
-    if (sortingType == SortType.SelectionSort) {
+    if (sortingType === SortType.SelectionSort) {
       await selectionSort(array, Direction.Descending);
-    } else if (sortingType == SortType.BubbleSort) {
+    } else if (sortingType === SortType.BubbleSort) {
       await bubbleSort(array, Direction.Descending);
     }
 
