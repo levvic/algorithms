@@ -16,15 +16,15 @@ export class LinkedList<T> implements ILinkedList<T> {
   constructor(array?: T[]) {
     if (array) {
       const length = array.length;
-      let curr = new LinkedListNode<T>(array[length-1]);
+      let curr = new LinkedListNode<T>(array[length - 1]);
       let temp;
-      
-      for (let i = length-2; i >= 0; i--) {
-            temp = new LinkedListNode(array[i], curr);
-            curr = temp;
+
+      for (let i = length - 2; i >= 0; i--) {
+        temp = new LinkedListNode(array[i], curr);
+        curr = temp;
       }
-    this.head = curr;
-    this.size = length;
+      this.head = curr;
+      this.size = length;
     } else {
       this.head = null;
       this.size = 0;
@@ -45,7 +45,7 @@ export class LinkedList<T> implements ILinkedList<T> {
       curr.next = node;
     }
     this.size++;
-  }
+  };
 
   prepend = (item: T) => {
     const node = new LinkedListNode(item);
@@ -54,36 +54,35 @@ export class LinkedList<T> implements ILinkedList<T> {
     }
     this.head = node;
     this.size++;
-  }
+  };
 
   addByIndex = (item: T, index: number) => {
     if (index < 0 || index > this.size) {
-      console.log('Введите корректный индекс');
       return;
-    } else {
-      const node = new LinkedListNode(item);
-      if (index === 0) {
-        if (this.head !== null) {
-          node.next = this.head;
-        }
-        this.head = node;
-      } else {
-        let curr = this.head;
-        let currIndex = 0;
-        while (currIndex < index) {
-          currIndex++;
-          if (curr?.next && currIndex !== index) {
-            curr = curr?.next;
-          }
-        }
-        if (curr) {
-          node.next = curr.next;
-          curr.next = node;
-        }        
-      }
-      this.size++;
     }
-  }
+
+    const node = new LinkedListNode(item);
+    if (index === 0) {
+      if (this.head !== null) {
+        node.next = this.head;
+      }
+      this.head = node;
+    } else {
+      let curr = this.head;
+      let currIndex = 0;
+      while (currIndex < index) {
+        currIndex++;
+        if (curr?.next && currIndex !== index) {
+          curr = curr?.next;
+        }
+      }
+      if (curr) {
+        node.next = curr.next;
+        curr.next = node;
+      }
+    }
+    this.size++;
+  };
 
   deleteByIndex = (index: number) => {
     if (index >= 0 && index < this.size && this.head) {
@@ -92,22 +91,22 @@ export class LinkedList<T> implements ILinkedList<T> {
       let currIndex = 0;
 
       if (index === 0) {
-          this.head = curr.next;
+        this.head = curr.next;
       } else {
-          while (currIndex < index) {
-              currIndex++
-            if (curr.next) {
-              prev = curr;
-              curr = curr.next;
-            }
+        while (currIndex < index) {
+          currIndex++;
+          if (curr.next) {
+            prev = curr;
+            curr = curr.next;
           }
-          prev.next = curr.next;
+        }
+        prev.next = curr.next;
       }
-      this.size--;      
+      this.size--;
     } else {
-      return ;
+      return;
     }
-  }
+  };
 
   deleteHead = () => {
     if (this.head !== null) {
@@ -116,7 +115,7 @@ export class LinkedList<T> implements ILinkedList<T> {
     } else {
       return;
     }
-  }
+  };
 
   deleteTail = () => {
     let curr = this.head;
@@ -133,8 +132,8 @@ export class LinkedList<T> implements ILinkedList<T> {
     if (prev !== null) {
       prev.next = null;
       this.size--;
-    }  
-  }
+    }
+  };
 
   toArray = (): Array<T> => {
     let curr = this.head;
@@ -144,22 +143,22 @@ export class LinkedList<T> implements ILinkedList<T> {
       curr = curr.next;
     }
     return array;
-  }
+  };
 
   getSize = (): number => {
     return this.size;
-  }
+  };
 
   getHead = (): LinkedListNode<T> | null => {
     return this.head;
-  }  
+  };
 }
 
 class LinkedListNode<T> {
-    value: T
-    next: LinkedListNode<T> | null
-    constructor(value: T, next?: LinkedListNode<T> | null) {
-      this.value = value;
-      this.next = (next === undefined ? null : next);
-    }
+  value: T;
+  next: LinkedListNode<T> | null;
+  constructor(value: T, next?: LinkedListNode<T> | null) {
+    this.value = value;
+    this.next = next === undefined ? null : next;
+  }
 }
