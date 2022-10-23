@@ -7,6 +7,7 @@ import { Button } from "../ui/button/button";
 import { useState, FormEvent } from "react";
 import { Circle } from "../ui/circle/circle";
 import { setInterval } from "../../utils/utils";
+import { getFibonacciNumbers } from "./utils";
 
 export const FibonacciPage: React.FC = () => {
   const [inputValue, setInputValue] = useState<number>(0);
@@ -17,21 +18,7 @@ export const FibonacciPage: React.FC = () => {
     e.preventDefault();
     setCircles([]);
     setInputValue(Number(e.currentTarget.value));
-  };
-
-  const getFibonacciNumbers = (n: number) => {
-    const arr: number[] = [];
-    let prev = 1;
-    let next = 1;
-    for (let i = 0; i < n; i++) {
-      arr.push(prev);
-      let temp = next;
-      next = prev + next;
-      prev = temp;
-    }
-    arr.push(prev);
-    return arr;
-  };
+  };  
 
   const renderFibSeq = async () => {
     setIsLoading(true);
