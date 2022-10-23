@@ -97,12 +97,8 @@ export const ListPage: React.FC = () => {
       return;
     } else {
       setloadingInProgress({
-        addToHead: false,
-        addToTail: false,
+        ...loadingInProgress,
         removeHead: true,
-        removeTail: false,
-        addByIndex: false,
-        removeByIndex: false,
         disabled: true,
       });
 
@@ -119,12 +115,8 @@ export const ListPage: React.FC = () => {
       setCircles([...circlesToRender]);
 
       setloadingInProgress({
-        addToHead: false,
-        addToTail: false,
+        ...loadingInProgress,
         removeHead: false,
-        removeTail: false,
-        addByIndex: false,
-        removeByIndex: false,
         disabled: false,
       });
     }
@@ -132,12 +124,8 @@ export const ListPage: React.FC = () => {
 
   const handleRemoveTail = async () => {
     setloadingInProgress({
-      addToHead: false,
-      addToTail: false,
-      removeHead: false,
+      ...loadingInProgress,
       removeTail: true,
-      addByIndex: false,
-      removeByIndex: false,
       disabled: true,
     });
 
@@ -160,12 +148,8 @@ export const ListPage: React.FC = () => {
     setCircles([...circlesToRender]);
 
     setloadingInProgress({
-      addToHead: false,
-      addToTail: false,
-      removeHead: false,
+      ...loadingInProgress,
       removeTail: false,
-      addByIndex: false,
-      removeByIndex: false,
       disabled: false,
     });
   };
@@ -190,12 +174,8 @@ export const ListPage: React.FC = () => {
 
   const handleAddToHead = async () => {
     setloadingInProgress({
+      ...loadingInProgress,
       addToHead: true,
-      addToTail: false,
-      removeHead: false,
-      removeTail: false,
-      addByIndex: false,
-      removeByIndex: false,
       disabled: true,
     });
 
@@ -218,24 +198,16 @@ export const ListPage: React.FC = () => {
     setCircles([...convertToCircleObj(linkedList.toArray())]);
 
     setloadingInProgress({
+      ...loadingInProgress,
       addToHead: false,
-      addToTail: false,
-      removeHead: false,
-      removeTail: false,
-      addByIndex: false,
-      removeByIndex: false,
       disabled: false,
     });
   };
 
   const handleAddToTail = async () => {
     setloadingInProgress({
-      addToHead: false,
+      ...loadingInProgress,
       addToTail: true,
-      removeHead: false,
-      removeTail: false,
-      addByIndex: false,
-      removeByIndex: false,
       disabled: true,
     });
 
@@ -258,12 +230,8 @@ export const ListPage: React.FC = () => {
     setCircles([...convertToCircleObj(linkedList.toArray())]);
 
     setloadingInProgress({
-      addToHead: false,
+      ...loadingInProgress,
       addToTail: false,
-      removeHead: false,
-      removeTail: false,
-      addByIndex: false,
-      removeByIndex: false,
       disabled: false,
     });
   };
@@ -278,12 +246,8 @@ export const ListPage: React.FC = () => {
       return;
     }
     setloadingInProgress({
-      addToHead: false,
-      addToTail: false,
-      removeHead: false,
-      removeTail: false,
+      ...loadingInProgress,
       addByIndex: true,
-      removeByIndex: false,
       disabled: true,
     });
 
@@ -349,12 +313,8 @@ export const ListPage: React.FC = () => {
     }
 
     setloadingInProgress({
-      addToHead: false,
-      addToTail: false,
-      removeHead: false,
-      removeTail: false,
+      ...loadingInProgress,
       addByIndex: false,
-      removeByIndex: false,
       disabled: false,
     });
   };
@@ -364,17 +324,12 @@ export const ListPage: React.FC = () => {
       parseInt(inputIndex) < 0 ||
       parseInt(inputIndex) > linkedList.getSize() - 1
     ) {
-      console.log("Введите корректный индекс");
       setInputIndex("");
       return;
     }
 
     setloadingInProgress({
-      addToHead: false,
-      addToTail: false,
-      removeHead: false,
-      removeTail: false,
-      addByIndex: false,
+      ...loadingInProgress,
       removeByIndex: true,
       disabled: true,
     });
@@ -433,11 +388,7 @@ export const ListPage: React.FC = () => {
     }
 
     setloadingInProgress({
-      addToHead: false,
-      addToTail: false,
-      removeHead: false,
-      removeTail: false,
-      addByIndex: false,
+      ...loadingInProgress,
       removeByIndex: false,
       disabled: false,
     });
