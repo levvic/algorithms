@@ -7,6 +7,7 @@ import stringStyles from "./string.module.css";
 import { useState } from "react";
 import { ElementStates } from "../../types/element-states";
 import { setInterval } from "../../utils/utils";
+import { DELAY_IN_MS } from "../../constants/delays";
 import { TElement } from "../../types/element-type";
 
 export const StringComponent: React.FC = () => {
@@ -49,9 +50,9 @@ export const StringComponent: React.FC = () => {
           elements[elements.length - i - 1].state = ElementStates.Modified;
           setElements(elements);
           updateCircles();
-        }, 1000)
-      }, 1000);
-      await setInterval(1000);
+        }, DELAY_IN_MS)
+      }, DELAY_IN_MS);
+      await setInterval(DELAY_IN_MS);
     }
 
     setIsLoading(false);

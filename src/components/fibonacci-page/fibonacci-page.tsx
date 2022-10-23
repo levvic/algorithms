@@ -8,6 +8,8 @@ import { useState, FormEvent } from "react";
 import { Circle } from "../ui/circle/circle";
 import { setInterval } from "../../utils/utils";
 import { getFibonacciNumbers } from "./utils";
+import { CONST_1, MAX_INPUT_FIB } from "../../constants/restrictions";
+import { SHORT_DELAY_IN_MS } from "../../constants/delays";
 
 export const FibonacciPage: React.FC = () => {
   const [inputValue, setInputValue] = useState<number>(0);
@@ -18,14 +20,14 @@ export const FibonacciPage: React.FC = () => {
     e.preventDefault();
     setCircles([]);
     setInputValue(Number(e.currentTarget.value));
-  };  
+  };
 
   const renderFibSeq = async () => {
     setIsLoading(true);
     const arr = getFibonacciNumbers(inputValue);
 
     for (let i = 0; i < arr.length; i++) {
-      await setInterval(500);
+      await setInterval(SHORT_DELAY_IN_MS);
       setCircles((state) => [...state, arr[i]]);
     }
 
@@ -36,9 +38,9 @@ export const FibonacciPage: React.FC = () => {
     <SolutionLayout title="Последовательность Фибоначчи">
       <form className={styles.form} onSubmit={(e) => e.preventDefault()}>
         <Input
-          max="19"
-          min="1"
-          step="1"
+          max={MAX_INPUT_FIB}
+          min={CONST_1}
+          step={CONST_1}
           type="number"
           placeholder="Введите число"
           extraClass={styles.input}
@@ -50,7 +52,7 @@ export const FibonacciPage: React.FC = () => {
           text="Рассчитать"
           isLoader={isLoading}
           onClick={renderFibSeq}
-          disabled={inputValue === 0 || inputValue > 19}
+          disabled={inputValue === 0 || inputValue > MAX_INPUT_FIB}
         />
       </form>
       <ul className={styles.list}>

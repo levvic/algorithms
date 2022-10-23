@@ -9,6 +9,7 @@ import { Stack } from "./stack";
 import { TElement } from "../../types/element-type";
 import { ElementStates } from "../../types/element-states";
 import { setInterval } from "../../utils/utils";
+import { SHORT_DELAY_IN_MS } from "../../constants/delays";
 
 export const StackPage: React.FC = () => {
   const [inputValue, setInputValue] = useState("");
@@ -26,7 +27,7 @@ export const StackPage: React.FC = () => {
     setInputValue("");
     setStack(stackCopy);
     setCircles([...stackCopy.getElements()]);
-    await setInterval(500);
+    await setInterval(SHORT_DELAY_IN_MS);
     stackCopy.peek()!.state = ElementStates.Default;
     setStack(stackCopy);
     setCircles([...stackCopy.getElements()]);
@@ -37,7 +38,7 @@ export const StackPage: React.FC = () => {
     stackCopy.peek()!.state = ElementStates.Changing;
     setStack(stackCopy);
     setCircles([...stackCopy.getElements()]);
-    await setInterval(500);
+    await setInterval(SHORT_DELAY_IN_MS);
     stackCopy.pop();
     setStack(stackCopy);
     setCircles([...stackCopy.getElements()]);

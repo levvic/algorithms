@@ -12,6 +12,7 @@ import { useState, ChangeEvent } from "react";
 import { randomArr } from "./utils";
 import { swap } from "../../utils/utils";
 import { TElement } from "../../types/element-type";
+import { DELAY_IN_MS } from "../../constants/delays";
 
 export const SortingPage: React.FC = () => {
   const [sortingType, setSortingType] = useState("select");
@@ -39,7 +40,7 @@ export const SortingPage: React.FC = () => {
       for (let j = i + 1; j < arr.length; j++) {
         arr[j].state = ElementStates.Changing;
         setArray([...arr]);
-        await setInterval(1000);
+        await setInterval(DELAY_IN_MS);
 
         if (
           direction === Direction.Ascending &&
@@ -74,7 +75,7 @@ export const SortingPage: React.FC = () => {
         arr[j].state = ElementStates.Changing;
         arr[j + 1].state = ElementStates.Changing;
         setArray([...arr]);
-        await setInterval(1000);
+        await setInterval(DELAY_IN_MS);
 
         if (
           direction === Direction.Ascending &&

@@ -9,6 +9,7 @@ import { Queue } from "./queue";
 import { setInterval } from "../../utils/utils";
 import { useState } from "react";
 import { TElement } from "../../types/element-type";
+import { SHORT_DELAY_IN_MS } from "../../constants/delays";
 
 export const QueuePage: React.FC = () => {
   const [inputValue, setInputValue] = useState("");
@@ -28,7 +29,7 @@ export const QueuePage: React.FC = () => {
     setInputValue('');
     setQueue(queueCopy);
     setCircles([...queueCopy.getElements()]);
-    await setInterval(500);
+    await setInterval(SHORT_DELAY_IN_MS);
     const lastElement = queueCopy.getElements()[queueCopy.getTail()];
     if (lastElement !== null) {
       lastElement.state = ElementStates.Default;
@@ -45,7 +46,7 @@ export const QueuePage: React.FC = () => {
     }    
     setQueue(queueCopy);
     setCircles([...queueCopy.getElements()]);
-    await setInterval(500);
+    await setInterval(SHORT_DELAY_IN_MS);
     queueCopy.dequeue();
     setQueue(queueCopy);
     setCircles([...queueCopy.getElements()]);
