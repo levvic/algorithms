@@ -46,34 +46,19 @@ export const ListPage: React.FC = () => {
 
   const convertToCircleObj = (array: Array<string>): Array<TCircleEl> => {
     return array.map((el, i) => {
-      if (array.length === 1) {
-        return {
-          value: el,
-          state: ElementStates.Default,
-          head: "head",
-          tail: "tail",
-        };
-      } else if (i === 0) {
-        return {
-          value: el,
-          state: ElementStates.Default,
-          head: "head",
-          tail: null,
-        };
-      } else if (i === array.length - 1) {
-        return {
-          value: el,
-          state: ElementStates.Default,
-          head: null,
-          tail: "tail",
-        };
-      }
-      return {
+      const circle = {
         value: el,
         state: ElementStates.Default,
-        head: null,
-        tail: null,
       };
+
+      if (array.length === 1) {
+        return { ...circle, head: "head", tail: "tail" };
+      } else if (i === 0) {
+        return { ...circle, head: "head", tail: null };
+      } else if (i === array.length - 1) {
+        return { ...circle, head: null, tail: "tail" };
+      }
+      return { ...circle, head: null, tail: null };
     });
   };
 
@@ -223,7 +208,7 @@ export const ListPage: React.FC = () => {
     addSmallCircle(circlesToRender, input, circlesToRender.length - 1, "head");
     setCircles([...circlesToRender]);
     await setInterval(500);
-    
+
     circlesToRender[circlesToRender.length - 1].state = ElementStates.Modified;
     setCircles([...circlesToRender]);
     await setInterval(500);
