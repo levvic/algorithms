@@ -184,13 +184,14 @@ export const ListPage: React.FC = () => {
     const listCopy = linkedList;
     let circlesToRender = circles;
 
-    addSmallCircle(circlesToRender, input, 0, "head");
-    setCircles([...circlesToRender]);
     listCopy.prepend(input);
-    await setInterval(500);
-
     setLinkedList(listCopy);
     circlesToRender = convertToCircleObj(linkedList.toArray());
+
+    addSmallCircle(circlesToRender, input, 0, "head");
+    setCircles([...circlesToRender]);
+    await setInterval(500);
+
     circlesToRender[0].state = ElementStates.Modified;
     setCircles([...circlesToRender]);
     await setInterval(500);
@@ -216,13 +217,13 @@ export const ListPage: React.FC = () => {
     const listCopy = linkedList;
     let circlesToRender = circles;
 
-    addSmallCircle(circlesToRender, input, circlesToRender.length - 1, "head");
-    setCircles([...circlesToRender]);
     listCopy.append(input);
-    await setInterval(500);
-
     setLinkedList(listCopy);
     circlesToRender = convertToCircleObj(linkedList.toArray());
+    addSmallCircle(circlesToRender, input, circlesToRender.length - 1, "head");
+    setCircles([...circlesToRender]);
+    await setInterval(500);
+    
     circlesToRender[circlesToRender.length - 1].state = ElementStates.Modified;
     setCircles([...circlesToRender]);
     await setInterval(500);
