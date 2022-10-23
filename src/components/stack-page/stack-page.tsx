@@ -10,6 +10,7 @@ import { TElement } from "../../types/element-type";
 import { ElementStates } from "../../types/element-states";
 import { setInterval } from "../../utils/utils";
 import { SHORT_DELAY_IN_MS } from "../../constants/delays";
+import { MAX_ELEMENTS, MAX_INPUT_LENGTH } from "../../constants/restrictions";
 
 export const StackPage: React.FC = () => {
   const [inputValue, setInputValue] = useState("");
@@ -55,7 +56,7 @@ export const StackPage: React.FC = () => {
     <SolutionLayout title="Стек">
       <div className={styles.form}>
         <Input
-          maxLength={4}
+          maxLength={MAX_INPUT_LENGTH}
           isLimitText
           placeholder="Введите текст"
           extraClass={styles.input}
@@ -66,7 +67,7 @@ export const StackPage: React.FC = () => {
           text="Добавить"
           extraClass={styles.btn}
           onClick={handleAddClick}
-          disabled={inputValue === ""}
+          disabled={inputValue === "" || stack.getSize() > MAX_ELEMENTS}
         />
         <Button
           text="Удалить"

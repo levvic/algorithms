@@ -10,10 +10,11 @@ import { setInterval } from "../../utils/utils";
 import { useState } from "react";
 import { TElement } from "../../types/element-type";
 import { SHORT_DELAY_IN_MS } from "../../constants/delays";
+import { MAX_ELEMENTS, MAX_INPUT_LENGTH } from "../../constants/restrictions";
 
 export const QueuePage: React.FC = () => {
   const [inputValue, setInputValue] = useState("");
-  const [queue, setQueue] = useState(new Queue<TElement<string>>(7));
+  const [queue, setQueue] = useState(new Queue<TElement<string>>(MAX_ELEMENTS));
   const [circles, setCircles] = useState<(TElement<string> | null)[]>(
     queue.getElements()
   );
@@ -63,7 +64,7 @@ export const QueuePage: React.FC = () => {
     <SolutionLayout title="Очередь">
       <div className={styles.form}>
         <Input
-          maxLength={4}
+          maxLength={MAX_INPUT_LENGTH}
           isLimitText
           placeholder="Введите текст"
           extraClass={styles.input}
@@ -74,7 +75,7 @@ export const QueuePage: React.FC = () => {
           text="Добавить"
           extraClass={styles.btn}
           onClick={handleAddClick}
-          disabled={inputValue === ""}
+          disabled={inputValue === "" || (!queue.isEmpty() && queue.getElements()[MAX_ELEMENTS-1] != null)}
         />
         <Button
           text="Удалить"
