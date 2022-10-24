@@ -16,6 +16,10 @@ export const StackPage: React.FC = () => {
   const [inputValue, setInputValue] = useState("");
   const [stack, setStack] = useState(new Stack<TElement<string>>());
   const [circles, setCircles] = useState<TElement<string>[]>([]);
+  const [loadingFlag, setLoadingFlag] = useState({
+    add: false,
+    delete: false,
+  });
 
   const onInputChange = (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -23,6 +27,10 @@ export const StackPage: React.FC = () => {
   };
 
   const handleAddClick = async () => {
+    setLoadingFlag({
+      ...loadingFlag,
+      add: true,
+    });
     const stackCopy = stack;
     stackCopy.push({ value: inputValue, state: ElementStates.Changing });
     setInputValue("");
@@ -32,9 +40,17 @@ export const StackPage: React.FC = () => {
     stackCopy.peek()!.state = ElementStates.Default;
     setStack(stackCopy);
     setCircles([...stackCopy.getElements()]);
+    setLoadingFlag({
+      ...loadingFlag,
+      add: false,
+    });
   };
 
   const handleDeleteClick = async () => {
+    setLoadingFlag({
+      ...loadingFlag,
+      delete: true,
+    });
     const stackCopy = stack;
     stackCopy.peek()!.state = ElementStates.Changing;
     setStack(stackCopy);
@@ -43,6 +59,10 @@ export const StackPage: React.FC = () => {
     stackCopy.pop();
     setStack(stackCopy);
     setCircles([...stackCopy.getElements()]);
+    setLoadingFlag({
+      ...loadingFlag,
+      delete: false,
+    });
   };
 
   const handleClearClick = async () => {
@@ -67,19 +87,21 @@ export const StackPage: React.FC = () => {
           text="Добавить"
           extraClass={styles.btn}
           onClick={handleAddClick}
-          disabled={inputValue === "" || stack.getSize() > MAX_ELEMENTS}
+          disabled={inputValue === "" || stack.getSize() > MAX_ELEMENTS || loadingFlag.delete}
+          isLoader={loadingFlag.add}
         />
         <Button
           text="Удалить"
           extraClass={styles.btn}
           onClick={handleDeleteClick}
-          disabled={stack.getSize() === 0}
+          disabled={stack.getSize() === 0 || loadingFlag.add}
+          isLoader={loadingFlag.delete}
         />
         <Button
           text="Очистить"
           extraClass={styles.btn}
           onClick={handleClearClick}
-          disabled={stack.getSize() === 0}
+          disabled={stack.getSize() === 0 || loadingFlag.add || loadingFlag.delete}
         />
       </div>
       <ul className={styles.list}>

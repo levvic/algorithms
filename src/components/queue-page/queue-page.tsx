@@ -18,6 +18,10 @@ export const QueuePage: React.FC = () => {
   const [circles, setCircles] = useState<(TElement<string> | null)[]>(
     queue.getElements()
   );
+  const [loadingFlag, setLoadingFlag] = useState({
+    add: false,
+    delete: false,
+  });
 
   const onInputChange = (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
@@ -25,6 +29,10 @@ export const QueuePage: React.FC = () => {
   };
 
   const handleAddClick = async () => {
+    setLoadingFlag({
+      ...loadingFlag,
+      add: true,
+    });
     const queueCopy = queue;
     queueCopy.enqueue({value: inputValue, state: ElementStates.Changing});
     setInputValue('');
@@ -37,9 +45,17 @@ export const QueuePage: React.FC = () => {
     }
     setQueue(queueCopy);
     setCircles([...queueCopy.getElements()]);
+    setLoadingFlag({
+      ...loadingFlag,
+      add: false,
+    });
   }
 
-  const handleDeleteClick = async () => {    
+  const handleDeleteClick = async () => {  
+    setLoadingFlag({
+      ...loadingFlag,
+      delete: true,
+    });  
     const queueCopy = queue;
     const firstElement = queueCopy.peek();
     if (firstElement !== null) {
@@ -51,6 +67,10 @@ export const QueuePage: React.FC = () => {
     queueCopy.dequeue();
     setQueue(queueCopy);
     setCircles([...queueCopy.getElements()]);
+    setLoadingFlag({
+      ...loadingFlag,
+      delete: false,
+    });
   }
 
   const handleClearClick = () => {
@@ -75,19 +95,21 @@ export const QueuePage: React.FC = () => {
           text="Добавить"
           extraClass={styles.btn}
           onClick={handleAddClick}
-          disabled={inputValue === "" || (!queue.isEmpty() && queue.getElements()[MAX_ELEMENTS-1] != null)}
+          disabled={inputValue === "" || loadingFlag.delete || (!queue.isEmpty() && queue.getElements()[MAX_ELEMENTS-1] != null)}
+          isLoader={loadingFlag.add}
         />
         <Button
           text="Удалить"
           extraClass={styles.btn}
           onClick={handleDeleteClick}
-          disabled={queue.isEmpty()}
+          disabled={queue.isEmpty() || loadingFlag.add}
+          isLoader={loadingFlag.delete}
         />
         <Button
           text="Очистить"
           extraClass={styles.btn}
           onClick={handleClearClick}
-          disabled={queue.isEmpty()}
+          disabled={queue.isEmpty() || loadingFlag.delete || loadingFlag.add}
         />
       </div>
       <ul className={styles.list}>

@@ -229,7 +229,6 @@ export const ListPage: React.FC = () => {
       parseInt(inputIndex) < 0 ||
       parseInt(inputIndex) > linkedList.getSize() - 1
     ) {
-      console.log("Введите корректный индекс");
       setInputIndex("");
       return;
     }
