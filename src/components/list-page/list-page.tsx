@@ -147,12 +147,12 @@ export const ListPage: React.FC = () => {
     index: number,
     location: "head" | "tail"
   ) => {
-    if (location === HEAD) {
+    if (array.length > 0 && location === HEAD) {
       array[index].head = (
         <Circle letter={value} isSmall state={ElementStates.Changing} />
       );
     }
-    if (location === TAIL) {
+    if (array.length > 0 && location === TAIL) {
       array[index].tail = (
         <Circle letter={value} isSmall state={ElementStates.Changing} />
       );
@@ -169,16 +169,15 @@ export const ListPage: React.FC = () => {
     const input = inputValue;
     setInputValue("");
     const listCopy = linkedList;
-    let circlesToRender = circles;
-
-    listCopy.prepend(input);
-    setLinkedList(listCopy);
-    circlesToRender = convertToCircleObj(linkedList.toArray());
+    let circlesToRender = circles;    
 
     addSmallCircle(circlesToRender, input, 0, HEAD);
     setCircles([...circlesToRender]);
     await setInterval(SHORT_DELAY_IN_MS);
 
+    listCopy.prepend(input);
+    setLinkedList(listCopy);
+    circlesToRender = convertToCircleObj(linkedList.toArray());
     circlesToRender[0].state = ElementStates.Modified;
     setCircles([...circlesToRender]);
     await setInterval(SHORT_DELAY_IN_MS);
@@ -203,13 +202,14 @@ export const ListPage: React.FC = () => {
     setInputValue("");
     const listCopy = linkedList;
     let circlesToRender = circles;
+        
+    addSmallCircle(circlesToRender, input, circlesToRender.length - 1, HEAD);
+    setCircles([...circlesToRender]);
+    await setInterval(SHORT_DELAY_IN_MS);
 
     listCopy.append(input);
     setLinkedList(listCopy);
     circlesToRender = convertToCircleObj(linkedList.toArray());
-    addSmallCircle(circlesToRender, input, circlesToRender.length - 1, HEAD);
-    setCircles([...circlesToRender]);
-    await setInterval(SHORT_DELAY_IN_MS);
 
     circlesToRender[circlesToRender.length - 1].state = ElementStates.Modified;
     setCircles([...circlesToRender]);
