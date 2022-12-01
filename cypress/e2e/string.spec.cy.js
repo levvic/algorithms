@@ -1,6 +1,6 @@
 import { circleContent, reverseInputCy, reverseBtnCy } from '../../src/constants/dom-content';
 
-describe("String reverse algorithm test", () => {
+describe("String reverse algorithm tests", () => {
   beforeEach(() => {
     cy.visit("/recursion");
   })

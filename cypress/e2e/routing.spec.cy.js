@@ -1,4 +1,4 @@
-describe('Application routing', function() {
+describe('Routing tests', function() {
     it('main-page', function() {
       cy.visit('/');
     });
