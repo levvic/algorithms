@@ -9,6 +9,7 @@ import { ElementStates } from "../../types/element-states";
 import { setInterval } from "../../utils/utils";
 import { DELAY_IN_MS } from "../../constants/delays";
 import { TElement } from "../../types/element-type";
+import { reverseBtn, reverseInput } from "../../constants/dom-content";
 
 export const StringComponent: React.FC = () => {
   const [inputValue, setInputValue] = useState<string>("");
@@ -78,12 +79,14 @@ export const StringComponent: React.FC = () => {
           extraClass={stringStyles.input}
           onChange={(e) => onInputChange(e)}
           value={inputValue}
+          dataCy={reverseInput}
         />
         <Button
           disabled={inputValue === ""}
           isLoader={isLoading}
           text="Развернуть"
           onClick={onBtnClick}
+          dataCy={reverseBtn}
         />
       </form>
       <ul className={stringStyles.list}>{circles}</ul>
