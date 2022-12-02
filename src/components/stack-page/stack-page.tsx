@@ -11,6 +11,7 @@ import { ElementStates } from "../../types/element-states";
 import { setInterval } from "../../utils/utils";
 import { SHORT_DELAY_IN_MS } from "../../constants/delays";
 import { MAX_ELEMENTS, MAX_INPUT_LENGTH } from "../../constants/restrictions";
+import { stackInput, stackAddBtn, stackRemoveBtn, stackClearBtn } from "../../constants/dom-content";
 
 export const StackPage: React.FC = () => {
   const [inputValue, setInputValue] = useState("");
@@ -82,6 +83,7 @@ export const StackPage: React.FC = () => {
           extraClass={styles.input}
           onChange={(e) => onInputChange(e)}
           value={inputValue}
+          dataCy={stackInput}
         />
         <Button
           text="Добавить"
@@ -89,6 +91,7 @@ export const StackPage: React.FC = () => {
           onClick={handleAddClick}
           disabled={inputValue === "" || stack.getSize() > MAX_ELEMENTS || loadingFlag.delete}
           isLoader={loadingFlag.add}
+          dataCy={stackAddBtn}
         />
         <Button
           text="Удалить"
@@ -96,11 +99,13 @@ export const StackPage: React.FC = () => {
           onClick={handleDeleteClick}
           disabled={stack.getSize() === 0 || loadingFlag.add}
           isLoader={loadingFlag.delete}
+          dataCy={stackRemoveBtn}
         />
         <Button
           text="Очистить"
           extraClass={styles.btn}
           onClick={handleClearClick}
+          dataCy={stackClearBtn}
           disabled={stack.getSize() === 0 || loadingFlag.add || loadingFlag.delete}
         />
       </div>
