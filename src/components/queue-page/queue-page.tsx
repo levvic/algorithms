@@ -11,6 +11,7 @@ import { useState } from "react";
 import { TElement } from "../../types/element-type";
 import { SHORT_DELAY_IN_MS } from "../../constants/delays";
 import { MAX_ELEMENTS, MAX_INPUT_LENGTH } from "../../constants/restrictions";
+import { queueAddBtn, queueRemoveBtn, queueClearBtn, queueInput } from "../../constants/dom-content";
 
 export const QueuePage: React.FC = () => {
   const [inputValue, setInputValue] = useState("");
@@ -90,6 +91,7 @@ export const QueuePage: React.FC = () => {
           extraClass={styles.input}
           onChange={(e) => onInputChange(e)}
           value={inputValue}
+          dataCy={queueInput}
         />
         <Button
           text="Добавить"
@@ -97,6 +99,7 @@ export const QueuePage: React.FC = () => {
           onClick={handleAddClick}
           disabled={inputValue === "" || loadingFlag.delete || (!queue.isEmpty() && queue.getElements()[MAX_ELEMENTS-1] != null)}
           isLoader={loadingFlag.add}
+          dataCy={queueAddBtn}
         />
         <Button
           text="Удалить"
@@ -104,12 +107,14 @@ export const QueuePage: React.FC = () => {
           onClick={handleDeleteClick}
           disabled={queue.isEmpty() || loadingFlag.add}
           isLoader={loadingFlag.delete}
+          dataCy={queueRemoveBtn}
         />
         <Button
           text="Очистить"
           extraClass={styles.btn}
           onClick={handleClearClick}
           disabled={queue.isEmpty() || loadingFlag.delete || loadingFlag.add}
+          dataCy={queueClearBtn}
         />
       </div>
       <ul className={styles.list}>

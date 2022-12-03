@@ -33,10 +33,10 @@ describe("Stack tests", () => {
         cy.get(stackInputCy).type(3);
         cy.get(stackAddBtnCy).click();
         cy.get(circleContent)
-            .each((value, index) => {
+            .each((element, index) => {
                 if (index === index.length - 1) {
-                    cy.wrap(value).contains("3");
-                    cy.wrap(value).contains("top");
+                    cy.wrap(element).contains("3");
+                    cy.wrap(element).contains("top");
                 }
             });
     });
@@ -68,10 +68,10 @@ describe("Stack tests", () => {
             .should('have.length', 3);
         cy.get(stackRemoveBtnCy).click();
         cy.get(circleContent)
-            .each((value, index) => {
+            .each((element, index) => {
                 if (index === index.length - 1) {
-                    cy.wrap(value).contains("2");
-                    cy.wrap(value).contains("top");
+                    cy.wrap(element).contains("2");
+                    cy.wrap(element).contains("top");
                 }
             });
     });
@@ -98,14 +98,14 @@ describe("Stack tests", () => {
 
         cy.get(circleContent)
             .should('have.length', 1)
-            .each((value, index) => {
-                if (index === 0) cy.wrap(value).find('[class*=circle_changing]');
+            .each((element, index) => {
+                if (index === 0) cy.wrap(element).find('[class*=circle_changing]');
             });
 
         cy.get(circleContent)
             .should('have.length', 1)
-            .each((value, index) => {
-                if (index === 0) cy.wrap(value).find('[class*=circle_default]');
+            .each((element, index) => {
+                if (index === 0) cy.wrap(element).find('[class*=circle_default]');
             });
 
         cy.get(stackInputCy).type(2);
@@ -113,15 +113,15 @@ describe("Stack tests", () => {
 
         cy.get(circleContent)
             .should('have.length', 2)
-            .each((value, index) => {
-                if (index === 0) cy.wrap(value).find('[class*=circle_default]');
-                if (index === 1) cy.wrap(value).find('[class*=circle_changing]');
+            .each((element, index) => {
+                if (index === 0) cy.wrap(element).find('[class*=circle_default]');
+                if (index === 1) cy.wrap(element).find('[class*=circle_changing]');
             });
 
         cy.get(circleContent)
             .should('have.length', 2)
-            .each((value, index) => {
-                if (index === 0 || index === 1) cy.wrap(value).find('[class*=circle_default]');
+            .each((element, index) => {
+                if (index === 0 || index === 1) cy.wrap(element).find('[class*=circle_default]');
             });
     });
 
@@ -143,42 +143,42 @@ describe("Stack tests", () => {
 
         cy.get(circleContent)
             .should('have.length', 3)
-            .each((value, index) => {
-                if (index === 0 || index === 1) cy.wrap(value).find('[class*=circle_default]');
-                if (index === 2) cy.wrap(value).find('[class*=circle_changing]');
+            .each((element, index) => {
+                if (index === 0 || index === 1) cy.wrap(element).find('[class*=circle_default]');
+                if (index === 2) cy.wrap(element).find('[class*=circle_changing]');
             });
 
         cy.wait(SHORT_DELAY_IN_MS);
 
         cy.get(circleContent)
             .should('have.length', 2)
-            .each((value, index) => {
-                if (index === 0 || index === 1) cy.wrap(value).find('[class*=circle_default]');
+            .each((element, index) => {
+                if (index === 0 || index === 1) cy.wrap(element).find('[class*=circle_default]');
             });
 
         cy.get(stackRemoveBtnCy).click();
 
         cy.get(circleContent)
             .should('have.length', 2)
-            .each((value, index) => {
-                if (index === 0) cy.wrap(value).find('[class*=circle_default]');
-                if (index === 1) cy.wrap(value).find('[class*=circle_changing]');
+            .each((element, index) => {
+                if (index === 0) cy.wrap(element).find('[class*=circle_default]');
+                if (index === 1) cy.wrap(element).find('[class*=circle_changing]');
             });
 
         cy.wait(SHORT_DELAY_IN_MS);
 
         cy.get(circleContent)
             .should('have.length', 1)
-            .each((value, index) => {
-                if (index === 0) cy.wrap(value).find('[class*=circle_default]');
+            .each((element, index) => {
+                if (index === 0) cy.wrap(element).find('[class*=circle_default]');
             });
 
         cy.get(stackRemoveBtnCy).click();
 
         cy.get(circleContent)
             .should('have.length', 1)
-            .each((value, index) => {
-                if (index === 0) cy.wrap(value).find('[class*=circle_changing]');
+            .each((element, index) => {
+                if (index === 0) cy.wrap(element).find('[class*=circle_changing]');
             });
 
         cy.wait(SHORT_DELAY_IN_MS);
