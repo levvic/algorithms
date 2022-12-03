@@ -11,6 +11,16 @@ import { setInterval } from "../../utils/utils";
 import { HEAD, TAIL } from "../../constants/element-captions";
 import { useState } from "react";
 import { SHORT_DELAY_IN_MS } from "../../constants/delays";
+import {
+  listInputValue,
+  listInputIndex,
+  listAddToHeadBtn,
+  listAddToTailBtn,
+  listAddByIndexBtn,
+  listRemoveByIndexBtn,
+  listRemoveFromHeadBtn,
+  listRemoveFromTailBtn,
+} from "../../constants/dom-content";
 
 type TCircleEl = {
   value: string;
@@ -169,7 +179,7 @@ export const ListPage: React.FC = () => {
     const input = inputValue;
     setInputValue("");
     const listCopy = linkedList;
-    let circlesToRender = circles;    
+    let circlesToRender = circles;
 
     addSmallCircle(circlesToRender, input, 0, HEAD);
     setCircles([...circlesToRender]);
@@ -202,7 +212,7 @@ export const ListPage: React.FC = () => {
     setInputValue("");
     const listCopy = linkedList;
     let circlesToRender = circles;
-        
+
     addSmallCircle(circlesToRender, input, circlesToRender.length - 1, HEAD);
     setCircles([...circlesToRender]);
     await setInterval(SHORT_DELAY_IN_MS);
@@ -392,6 +402,7 @@ export const ListPage: React.FC = () => {
             extraClass={styles.input}
             onChange={(e) => onInputValueChange(e)}
             value={inputValue}
+            dataCy={listInputValue}
           />
           <Button
             text="Добавить в head"
@@ -399,6 +410,7 @@ export const ListPage: React.FC = () => {
             onClick={handleAddToHead}
             disabled={inputValue === "" || loadingInProgress.disabled}
             isLoader={loadingInProgress.addToHead}
+            dataCy={listAddToHeadBtn}
           />
           <Button
             text="Добавить в tail"
@@ -406,6 +418,7 @@ export const ListPage: React.FC = () => {
             onClick={handleAddToTail}
             disabled={inputValue === "" || loadingInProgress.disabled}
             isLoader={loadingInProgress.addToTail}
+            dataCy={listAddToTailBtn}
           />
           <Button
             text="Удалить из head"
@@ -415,6 +428,7 @@ export const ListPage: React.FC = () => {
               linkedList.toArray().length === 0 || loadingInProgress.disabled
             }
             isLoader={loadingInProgress.removeHead}
+            dataCy={listRemoveFromHeadBtn}
           />
           <Button
             text="Удалить из tail"
@@ -424,6 +438,7 @@ export const ListPage: React.FC = () => {
               linkedList.toArray().length === 0 || loadingInProgress.disabled
             }
             isLoader={loadingInProgress.removeTail}
+            dataCy={listRemoveFromTailBtn}
           />
         </div>
         <div className={styles.row}>
@@ -436,6 +451,7 @@ export const ListPage: React.FC = () => {
             extraClass={styles.input}
             onChange={(e) => onInputIndexChange(e)}
             value={inputIndex}
+            dataCy={listInputIndex}
           />
           <Button
             text="Добавить по индексу"
@@ -449,6 +465,7 @@ export const ListPage: React.FC = () => {
               parseInt(inputIndex) > linkedList.getSize() - 1
             }
             isLoader={loadingInProgress.addByIndex}
+            dataCy={listAddByIndexBtn}
           />
           <Button
             text="Удалить по индексу"
@@ -461,6 +478,7 @@ export const ListPage: React.FC = () => {
               parseInt(inputIndex) > linkedList.getSize() - 1
             }
             isLoader={loadingInProgress.removeByIndex}
+            dataCy={listRemoveByIndexBtn}
           />
         </div>
       </div>
