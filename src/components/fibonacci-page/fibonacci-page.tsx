@@ -10,6 +10,7 @@ import { setInterval } from "../../utils/utils";
 import { getFibonacciNumbers } from "./utils";
 import { CONST_1, MAX_INPUT_VALUE_FIB } from "../../constants/restrictions";
 import { SHORT_DELAY_IN_MS } from "../../constants/delays";
+import { fibonacciInput, fibonacciBtn } from "../../constants/dom-content";
 
 export const FibonacciPage: React.FC = () => {
   const [inputValue, setInputValue] = useState<number>(0);
@@ -46,12 +47,14 @@ export const FibonacciPage: React.FC = () => {
           extraClass={styles.input}
           onChange={(e) => onInputChange(e)}
           value={inputValue}
+          dataCy={fibonacciInput}
           isLimitText
         />
         <Button
           text="Рассчитать"
           isLoader={isLoading}
           onClick={renderFibSeq}
+          dataCy={fibonacciBtn}
           disabled={inputValue === 0 || inputValue > MAX_INPUT_VALUE_FIB}
         />
       </form>

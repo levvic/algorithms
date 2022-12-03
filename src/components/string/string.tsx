@@ -9,6 +9,8 @@ import { ElementStates } from "../../types/element-states";
 import { setInterval } from "../../utils/utils";
 import { DELAY_IN_MS } from "../../constants/delays";
 import { TElement } from "../../types/element-type";
+import { reverseBtn, reverseInput } from "../../constants/dom-content";
+import { swap } from "../../utils/utils";
 
 export const StringComponent: React.FC = () => {
   const [inputValue, setInputValue] = useState<string>("");
@@ -43,9 +45,7 @@ export const StringComponent: React.FC = () => {
         setElements(elements);
         updateCircles();
         setTimeout(function() {
-          temp = elements[elements.length - i - 1];
-          elements[elements.length - i - 1] = elements[i];
-          elements[i] = temp;
+          swap(elements, elements.length - i - 1, i);
           elements[i].state = ElementStates.Modified;
           elements[elements.length - i - 1].state = ElementStates.Modified;
           setElements(elements);
@@ -78,12 +78,14 @@ export const StringComponent: React.FC = () => {
           extraClass={stringStyles.input}
           onChange={(e) => onInputChange(e)}
           value={inputValue}
+          dataCy={reverseInput}
         />
         <Button
           disabled={inputValue === ""}
           isLoader={isLoading}
           text="Развернуть"
           onClick={onBtnClick}
+          dataCy={reverseBtn}
         />
       </form>
       <ul className={stringStyles.list}>{circles}</ul>
